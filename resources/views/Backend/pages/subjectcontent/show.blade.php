@@ -1,7 +1,7 @@
 @extends('Backend.main')
 @section('content')
 <div class="container">
-    <h2><i class="fa fa-list"></i> Subject List</h2> <hr>
+    <h2><i class="fa fa-list"></i> Subject Content List </h2> <hr>
     @if(Session::has('success'))
     <div class="alert alert-success">
         {{Session::get('success')}}
@@ -13,14 +13,14 @@
         {{Session::get('error')}}
     </div>
 @endif
-    @if ($subjectData->count()>0)
+    @if ($subjectcontent->count()>0)
     <div class="col-md-12">
         <input id="table_search" type="text" placeholder="Search here..." class="form-control"><br>
         <table class="table table-bordered table-stripped">
             <tr>
                 <th>SN</th>
-                <th>Grade</th>
-                <th>Subject Name</th>
+                <th>Heading</th>
+                <th>Title</th>
                 <th>Status</th>
                 <th >Action</th>
             </tr>
@@ -31,11 +31,11 @@
                 $key1 = 25*($_GET['page']-1)+1;
 
                 }?>
-            @foreach ($subjectData as $item)
+            @foreach ($subjectcontent as $item)
                 <tr>
                     <td>{{$key1++}}</td>
                    
-                       <td>  {{$item->getGradeName->title}}</td>
+                       <td>  {{$item->heading}}</td>
                       <td> {{$item->title}}</td>
                       
                        <td>
@@ -55,7 +55,7 @@
                        </td>
                    
                     <td>
-                        <a href="{{route('manage-subjectcontent',$item->id)}}" class="btn btn-sm btn-info">Manage content</a>
+                        <a href="{{route('manage-subjectcontent',$item->id)}}" class="btn btn-sm btn-info">View Details</a>
 
                         <a href="{{route('edit-subject',$item->id)}}" class="btn btn-sm btn-warning">Edit</a>
                     <a href="{{route('delete-subject',$item->id)}}" onclick="return confirm('Are you sure you want to delete this?')" class="btn btn-sm btn-danger">Delete</a></td>

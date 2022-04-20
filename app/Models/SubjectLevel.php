@@ -20,4 +20,7 @@ class SubjectLevel extends Model
     public function getGradeName(){
         return $this->belongsTo(Grade::class,'grade','id');
     }
+    public function getLevelName(){
+        return $this->belongsTo(Level::class,'level','id');
+    }
 }

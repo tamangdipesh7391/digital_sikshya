@@ -5,6 +5,7 @@ use App\Http\Controllers\backend\BackendController;
 use App\Http\Controllers\Backend\GradeController;
 use App\Http\Controllers\backend\HomeController;
 use App\Http\Controllers\backend\LevelController;
+use App\Http\Controllers\backend\SubjectContentController;
 use App\Http\Controllers\backend\SubjectController;
 use App\Http\Controllers\Backend\SubjectLevelController;
 
@@ -48,11 +49,11 @@ Route::group(['namespace' => 'Backend','prefix' => 'admin-panel'],function(){
 
 
     //Subject Content Route
-    Route::any('/add-subjectcontent/{id?}',[SubjectLevelController::class,'create'])->name('add-subjectcontent');
-    Route::get('/manage-subjectcontent',[SubjectLevelController::class,'index'])->name('manage-subjectcontent');
-    Route::get('/delete-subjectcontent/{id}',[SubjectLevelController::class,'destroy'])->name('delete-subjectcontent');
-    Route::any('/edit-subjectcontent/{id?}',[SubjectLevelController::class,'update'])->name('edit-subjectcontent');
-    Route::any('/subjectcontent-status/{id?}',[SubjectLevelController::class,'toggleStatus'])->name('subjectcontent-status');
+    Route::any('/add-subjectcontent/{sid?}/{gid?}/{lid?}',[SubjectContentController::class,'create'])->name('add-subjectcontent');
+    Route::get('/manage-subjectcontent/{sid}',[SubjectContentController::class,'index'])->name('manage-subjectcontent');
+    Route::get('/delete-subjectcontent/{id}',[SubjectContentController::class,'destroy'])->name('delete-subjectcontent');
+    Route::any('/edit-subjectcontent/{id?}',[SubjectContentController::class,'update'])->name('edit-subjectcontent');
+    Route::any('/subjectcontent-status/{id?}',[SubjectContentController::class,'toggleStatus'])->name('subjectcontent-status');
 
     // Ajax route 
     Route::get('/getSubject',[SubjectLevelController::class,'getSubject']);

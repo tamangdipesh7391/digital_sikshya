@@ -15,6 +15,9 @@ class CreateSubjectContentsTable extends Migration
     {
         Schema::create('subject_contents', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('subject')->constrained('subjects');
+            $table->foreignId('grade')->constrained('grades');
+            $table->foreignId('level')->constrained('levels');
             $table->string('heading')->unique();
             $table->string('title')->unique();
             $table->string('thumbnail');

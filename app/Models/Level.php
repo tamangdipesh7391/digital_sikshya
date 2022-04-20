@@ -14,4 +14,6 @@ class Level extends Model
     public function getTitleAttribute($val){
         return ucfirst($val);
     }
+
+    
 }
