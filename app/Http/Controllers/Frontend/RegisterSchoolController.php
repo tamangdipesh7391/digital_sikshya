@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Frontend;
 use Illuminate\Support\Facades\Mail;
+use App\Models\School;
 
 use App\Http\Controllers\Controller;
-use App\Models\School;
 use Illuminate\Http\Request;
 
 class RegisterSchoolController extends Controller

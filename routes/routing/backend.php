@@ -10,13 +10,13 @@ use App\Http\Controllers\backend\SubjectController;
 use App\Http\Controllers\Backend\SubjectLevelController;
 
 Route::group(['prefix' => 'admin-panel'],function(){
-    Route::get('/',[HomeController::class,'index'])->name('admin-home');
-    Route::get('/register',[HomeController::class,'register'])->name('register');
+    Route::any('/',[HomeController::class,'index'])->name('admin-home');
+    Route::any('/register',[HomeController::class,'register'])->name('register');
     Route::get('/logout',[HomeController::class,'logout'])->name('logout');
 
 });
 
-Route::group(['namespace' => 'Backend','prefix' => 'admin-panel'],function(){
+Route::group(['namespace' => 'Backend', 'middleware' => 'LoginValidator', 'prefix' => 'admin-panel'],function(){
     //Grade Route
     Route::any('/add-grade',[GradeController::class,'create'])->name('add-grade');
     Route::get('/manage-grade',[GradeController::class,'index'])->name('manage-grade');
