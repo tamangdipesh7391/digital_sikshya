@@ -9,6 +9,9 @@ class SubjectContent extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'subject',
+        'grade',
+        'level',
         'heading',
         'title',
         'thumbnail',
@@ -37,4 +40,18 @@ class SubjectContent extends Model
             }
         }
     }
+
+
+    public function getSubjectName(){
+        return $this->belongsTo(Subject::class,'subject','id');
+    }
+
+    public function getGradeName(){
+        return $this->belongsTo(Grade::class,'grade','id');
+    }
+
+    public function getLevelName(){
+        return $this->belongsTo(Level::class,'level','id');
+    }
+
 }

@@ -50,9 +50,11 @@ Route::group(['namespace' => 'Backend','prefix' => 'admin-panel'],function(){
 
     //Subject Content Route
     Route::any('/add-subjectcontent/{sid?}/{gid?}/{lid?}',[SubjectContentController::class,'create'])->name('add-subjectcontent');
-    Route::get('/manage-subjectcontent/{sid}',[SubjectContentController::class,'index'])->name('manage-subjectcontent');
+    Route::get('/manage-subjectcontent/{sid?}',[SubjectContentController::class,'index'])->name('manage-subjectcontent');
+    Route::get('/show-subjectcontent/{sid?}/{gid?}/{lid?}',[SubjectContentController::class,'show'])->name('show-subjectcontent');
     Route::get('/delete-subjectcontent/{id}',[SubjectContentController::class,'destroy'])->name('delete-subjectcontent');
     Route::any('/edit-subjectcontent/{id?}',[SubjectContentController::class,'update'])->name('edit-subjectcontent');
+    Route::get('/view-subjectcontent/{id?}',[SubjectContentController::class,'view'])->name('view-subjectcontent');
     Route::any('/subjectcontent-status/{id?}',[SubjectContentController::class,'toggleStatus'])->name('subjectcontent-status');
 
     // Ajax route 

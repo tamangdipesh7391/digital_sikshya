@@ -1,7 +1,13 @@
 @extends('Backend.main')
 @section('content')
 <div class="container">
-    <h2><i class="fa fa-list"></i> Subject Content List </h2> <hr>
+    @if ($subwisecontentData->count()>0)
+    <h2><i class="fa fa-list"></i> Subject Content List of 
+        {{$subwisecontentData[0]->getSubjectName->title}} (Grade : {{$subwisecontentData[0]->getGradeName->title}} <b>- {{$subwisecontentData[0]->getLevelName->title}}</b> )
+        </h2>
+   
+    @endif 
+    <hr>
     @if(Session::has('success'))
     <div class="alert alert-success">
         {{Session::get('success')}}
@@ -13,7 +19,7 @@
         {{Session::get('error')}}
     </div>
 @endif
-    @if ($subjectcontent->count()>0)
+    @if ($subwisecontentData->count()>0)
     <div class="col-md-12">
         <input id="table_search" type="text" placeholder="Search here..." class="form-control"><br>
         <table class="table table-bordered table-stripped">
@@ -31,7 +37,7 @@
                 $key1 = 25*($_GET['page']-1)+1;
 
                 }?>
-            @foreach ($subjectcontent as $item)
+            @foreach ($subwisecontentData as $item)
                 <tr>
                     <td>{{$key1++}}</td>
                    
@@ -55,14 +61,14 @@
                        </td>
                    
                     <td>
-                        <a href="{{route('manage-subjectcontent',$item->id)}}" class="btn btn-sm btn-info">View Details</a>
+                        <a href="{{route('view-subjectcontent',$item->id)}}" class="btn btn-sm btn-info">View Details</a>
 
-                        <a href="{{route('edit-subject',$item->id)}}" class="btn btn-sm btn-warning">Edit</a>
-                    <a href="{{route('delete-subject',$item->id)}}" onclick="return confirm('Are you sure you want to delete this?')" class="btn btn-sm btn-danger">Delete</a></td>
+                        <a href="{{route('edit-subjectcontent',$item->id)}}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{{route('delete-subjectcontent',$item->id)}}" onclick="return confirm('Are you sure you want to delete this?')" class="btn btn-sm btn-danger">Delete</a></td>
                 </tr>
             @endforeach
         </table>
-        {{$subjectData->links('vendor.pagination.custom')}}
+        {{$subwisecontentData->links('vendor.pagination.custom')}}
     </div>
     @else
         <p style="color: red">No data available.</p>

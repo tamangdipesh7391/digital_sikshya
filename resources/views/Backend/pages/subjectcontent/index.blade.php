@@ -27,7 +27,7 @@
                   <hr >
                    <p>
                     <a href="{{url('admin-panel/add-subjectcontent/'.$subjectlevel->subject.'/'.$subjectlevel->grade.'/'.$subjectlevel->level)}}" class="btn btn-sm btn-outline-primary mr-3">Add Content</a>
-                    <a href="" class="btn btn-sm btn-outline-success">Manage Content</a>
+                    <a href="{{url('admin-panel/show-subjectcontent/'.$subjectlevel->subject.'/'.$subjectlevel->grade.'/'.$subjectlevel->level)}}" class="btn btn-sm btn-outline-success">Manage Content</a>
                    </p>
     
                 </div>

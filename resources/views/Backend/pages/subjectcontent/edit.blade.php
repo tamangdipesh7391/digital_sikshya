@@ -1,26 +1,16 @@
 @extends('Backend.main')
 @section('content')
 <div class="container">
-    <h2>Add Subject Content Here</h2>
-    @if(Session::has('success'))
-                <div class="alert alert-success">
-                    {{Session::get('success')}}
-                </div>
-            @endif
-
-            @if(Session::has('error'))
-                <div class="alert alert-danger">
-                    {{Session::get('error')}}
-                </div>
-            @endif
+    <h2>Details of {{$singlesubcontentData->getSubjectName->title}} subject(Grade : {{$singlesubcontentData->getGradeName->title}} <b>- {{$singlesubcontentData->getLevelName->title}}</b> )
+    </h2>
 
 <hr>
 <div class="col-md-8">
-    <form action="" method="POST" class="form-group" enctype="multipart/form-data">
+    <form action="{{route('edit-subjectcontent',$singlesubcontentData->id)}}" method="POST" class="form-group" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="">Heading </label>
-            <input type="text" class="form-control" value="{{old('heading')}}" name="heading" placeholder="A,B,C,..etc">  
+            <input type="text" class="form-control" value="{{$singlesubcontentData->heading}}" name="heading" >  
             <a style="color: red">
             @error('heading')
                 {{$message}}
@@ -29,7 +19,7 @@
           </div>
           <div class="form-group">
             <label for="">Title</label>
-            <input type="text" class="form-control" value="{{old('title')}}" name="title" placeholder="Apple,Ball,Car,.. etc.">  
+            <input type="text" class="form-control" value="{{$singlesubcontentData->title}}" name="title" >  
             <a style="color: red">
             @error('title')
                 {{$message}}
@@ -40,13 +30,13 @@
             <div class="form-group col-md-6">
                 <label for="">Thumbnail</label>
                 <input type="file" class="form-control" name="thumbnail" onchange="previewImg(this,'#thumbnail');"   />  
-                <img class="img-fluid prev_img mt-2 " id="thumbnail" src="#" alt="your image" />
+                <img class="img-fluid prev_img mt-2 " id="thumbnail" src="{{url('images/'.$singlesubcontentData->thumbnail)}}" alt="your image" />
                  <a style="color: red">@error('thumbnail') {{$message}} @enderror </a>
               </div>
               <div class="form-group col-md-6">
                 <label for="">Inner</label>
                 <input type="file" class="form-control"  name="inner_img" onchange="previewImg(this,'#inner_img');">  
-                <img class="img-fluid prev_img mt-2" id="inner_img" src="#" alt="your image" />
+                <img class="img-fluid prev_img mt-2" id="inner_img" src="{{url('images/'.$singlesubcontentData->inner_img)}}" alt="your image" />
 
                  {{-- <a style="color: red">@error('thumbnail') {{$message}} @enderror </a> --}}
               </div>
@@ -55,14 +45,14 @@
             <div class="form-group col-md-6">
                 <label for="">Front</label>
                 <input type="file" class="form-control"  name="front_img" onchange="previewImg(this,'#front_img');" >  
-                <img class="img-fluid prev_img mt-2" id="front_img" src="#" alt="your image" />
+                <img class="img-fluid prev_img mt-2" id="front_img" src="{{url('images/'.$singlesubcontentData->front_img)}}" alt="your image" />
 
                  {{-- <a style="color: red">@error('thumbnail') {{$message}} @enderror </a> --}}
               </div>
               <div class="form-group col-md-6">
                 <label for="">Back</label>
                 <input type="file" class="form-control"  name="back_img" onchange="previewImg(this,'#back_img');" >  
-                <img class="img-fluid prev_img mt-2" id="back_img" src="#" alt="your image" />
+                <img class="img-fluid prev_img mt-2" id="back_img" src="{{url('images/'.$singlesubcontentData->back_img)}}" alt="your image" />
 
                  {{-- <a style="color: red">@error('thumbnail') {{$message}} @enderror </a> --}}
               </div>
@@ -71,14 +61,14 @@
             <div class="form-group col-md-6">
                 <label for="">Left</label>
                 <input type="file" class="form-control"  name="left_img" onchange="previewImg(this,'#left_img');" >  
-                <img class="img-fluid prev_img mt-2" id="left_img" src="#" alt="your image" />
+                <img class="img-fluid prev_img mt-2" id="left_img" src="{{url('images/'.$singlesubcontentData->left_img)}}" alt="your image" />
 
                  {{-- <a style="color: red">@error('thumbnail') {{$message}} @enderror </a> --}}
               </div>
               <div class="form-group col-md-6">
                 <label for="">Right</label>
                 <input type="file" class="form-control"  name="right_img" onchange="previewImg(this,'#right_img');" >  
-                <img class="img-fluid prev_img mt-2" id="right_img" src="#" alt="your image" />
+                <img class="img-fluid prev_img mt-2" id="right_img" src="{{url('images/'.$singlesubcontentData->right_img)}}" alt="your image" />
 
                  {{-- <a style="color: red">@error('thumbnail') {{$message}} @enderror </a> --}}
               </div>
@@ -87,14 +77,14 @@
             <div class="form-group col-md-6">
                 <label for="">Top</label>
                 <input type="file" class="form-control"  name="top_img" onchange="previewImg(this,'#top_img');" >  
-                <img class="img-fluid prev_img mt-2" id="top_img" src="#" alt="your image" />
+                <img class="img-fluid prev_img mt-2" id="top_img" src="{{url('images/'.$singlesubcontentData->top_img)}}" alt="your image" />
 
                  {{-- <a style="color: red">@error('thumbnail') {{$message}} @enderror </a> --}}
               </div>
               <div class="form-group col-md-6">
                 <label for="">Bottom</label>
                 <input type="file" class="form-control"  name="bottom_img" onchange="previewImg(this,'#bottom_img');" >  
-                <img class="img-fluid prev_img mt-2" id="bottom_img" src="#" alt="your image" />
+                <img class="img-fluid prev_img mt-2" id="bottom_img" src="{{url('images/'.$singlesubcontentData->bottom_img)}}" alt="your image" />
 
                  {{-- <a style="color: red">@error('thumbnail') {{$message}} @enderror </a> --}}
               </div>
@@ -102,33 +92,58 @@
           
           <div class="form-group">
             <label for="">Meta Description</label>
-            <textarea name="meta_description" id="ck_meta_description" cols="30" rows="10">{{old('meta_description')}}</textarea>
+            <textarea name="meta_description" id="ck_meta_description" cols="30" rows="10">{{$singlesubcontentData->meta_description}}</textarea>
             <a style="color: red">@error('meta_description') {{$message}} @enderror </a>
           </div>
           <div class="form-group">
             <label for="">Description</label>
-            <textarea name="description" id="ck_description" cols="30" rows="10">{{old('description')}}</textarea>
+            <textarea name="description" id="ck_description" cols="30" rows="10">{{$singlesubcontentData->description}}</textarea>
             <a style="color: red">@error('description') {{$message}} @enderror </a>
           </div>
 
         
 
           <div class="form-group">
-              <button class="btn btn-info">Add</button>
+              <button class="btn btn-info">Update</button>
           </div>
     </form>
 </div>
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
-      $('#thumbnail').hide();
-      $('#inner_img').hide();
-      $('#front_img').hide();
-      $('#back_img').hide();
-      $('#left_img').hide();
-      $('#right_img').hide();
-      $('#top_img').hide();
-      $('#bottom_img').hide();
+    var thumbnail = "{{$singlesubcontentData->thumbnail}}";
+    if(thumbnail == ""){
+        $('#thumbnail').hide();
+    }
+    var inner_img = "{{$singlesubcontentData->inner_img}}";
+    if(inner_img == ""){
+        $('#inner_img').hide();
+    }
+    var front_img = "{{$singlesubcontentData->front_img}}";
+    if(front_img == ""){
+        $('#front_img').hide();
+    }
+    var back_img = "{{$singlesubcontentData->back_img}}";
+    if(back_img == ""){
+        $('#back_img').hide();
+    }
+    var left_img = "{{$singlesubcontentData->left_img}}";
+    if(left_img == ""){
+        $('#left_img').hide();
+    }
+    var right_img = "{{$singlesubcontentData->right_img}}";
+    if(right_img == ""){
+        $('#right_img').hide();
+    }
+    var top_img = "{{$singlesubcontentData->top_img}}";
+    if(top_img == ""){
+        $('#top_img').hide();
+    }
+    var bottom_img = "{{$singlesubcontentData->bottom_img}}";
+    if(bottom_img == ""){
+        $('#bottom_img').hide();
+    }
+
 
     })
     function previewImg(input,id) {
