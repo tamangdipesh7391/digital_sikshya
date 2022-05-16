@@ -22,6 +22,7 @@ class CreateSchoolsTable extends Migration
             $table->string('city');
             $table->string('street');
             $table->string('principle');
+            $table->boolean('isVerified')->default(0);
             $table->string('short_code')->unique();
             $table->timestamps();
         });

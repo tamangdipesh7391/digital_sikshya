@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Models\School;
+use App\Models\SchoolLogin;
 use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
@@ -26,8 +27,8 @@ class HomeController extends Controller
 
             ]);
             $username = $request->username;
-            $password = md5($request->password);
-            $res = User::where('email','=',$username)->where('password','=',$password)->get();
+            $password = sha1($request->password);
+            $res = SchoolLogin::where('username','=',$username)->where('password','=',$password)->get();
             if($res->count()>0){
                Session::put('loginStatus',TRUE);
                return view('Backend.home');
@@ -59,18 +60,31 @@ class HomeController extends Controller
 
 
             ]);
+            $schoolData = new School();
+            $schoolData->name = $request->name;
+            $schoolData->email = $request->email;
+            $schoolData->phone = $request->phone;
+            $schoolData->district = $request->district;
+            $schoolData->city = $request->city;
+            $schoolData->street = $request->street;
+            $schoolData->principle = $request->principle;
+            $schoolData->short_code = $request->short_code;
 
-            $register_college_data = $request->all();
-            School::create($register_college_data);
-            $details = [
-                'title' => 'Mail from ItSolutionStuff.com',
-                'body' => 'This is for testing email using smtp'
-            ];
+            $school_loginData = new SchoolLogin();
+            $school_loginData->username = $request->email;
+            $school_loginData->password = sha1($request->password);
+
+            $schoolData->save();
+            $school_loginData->save();
+            // $details = [
+            //     'title' => 'Mail from ItSolutionStuff.com',
+            //     'body' => 'This is for testing email using smtp'
+            // ];
             
-            Mail::to('tamangdipesh7391@gmail.com')->send(new \App\Mail\CollegeRegistrationMail($details));
+            // Mail::to('tamangdipesh7391@gmail.com')->send(new \App\Mail\CollegeRegistrationMail($details));
 
            
-            dd("Email is Sent.");
+            // dd("Email is Sent.");
             return redirect()->back()->with('success','Your request has been sent successfully, please check you inbox to verify registration !');
         }
     }

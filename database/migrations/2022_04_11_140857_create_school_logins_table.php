@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSchoolLoginTable extends Migration
+class CreateSchoolLoginsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSchoolLoginTable extends Migration
      */
     public function up()
     {
-        Schema::create('school_login', function (Blueprint $table) {
+        Schema::create('school_logins', function (Blueprint $table) {
             $table->id();
             $table->string('username')->unique();
             $table->string('password');

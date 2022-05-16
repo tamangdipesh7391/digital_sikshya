@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Grade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Validation\Rule;
 
 class GradeController extends Controller
 {
@@ -32,7 +33,7 @@ class GradeController extends Controller
        }
        if($request->isMethod('post')){
             $request->validate([
-                'title' => 'required'
+                'title' => 'required|unique:grades,title'
             ]);
 
             $gradeData = $request->all();
@@ -94,7 +95,9 @@ class GradeController extends Controller
         }
         if($request->isMethod('post')){
             $request->validate([
-                'title' => 'required'
+                'title' => ['required',
+                Rule::unique('grades','title')->ignore($id)
+                ]
             ]);
             $updatedData = Grade::findOrFail($id);
             $input = $request->all();

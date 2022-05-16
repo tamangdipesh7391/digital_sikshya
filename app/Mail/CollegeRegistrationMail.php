@@ -17,12 +17,10 @@ class CollegeRegistrationMail extends Mailable
      * @return void
      */
     
-    public $details;
-
-    public function __construct($details)
+    
+    public function __construct()
     {
 
-        $this->details = $details;
     }
   
 
@@ -33,8 +31,7 @@ class CollegeRegistrationMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Mail from ItSolutionStuff.com')
-        ->view('Frontend.pages.mail.index');
+        return $this->view('Frontend.pages.mail.index');
        
         
     }

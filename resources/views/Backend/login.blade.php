@@ -45,7 +45,7 @@
         <div class="row">
             <div class="col-md-5  m-auto">
                 <div class="card border-primary mt-3">
-                    <div class="card-header text-primary text-center"><h5 class="card-title"><a href="{{url('/')}}">BBA College Nepal</a></h5></div>
+                    <div class="card-header text-primary text-center"><h5 class="card-title"><a href="{{url('/')}}">Digital_Sikshya</a></h5></div>
                     <div class="card-body text-primary">
                         @if (Session('success'))
                         <div class="alert alert-success">

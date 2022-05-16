@@ -4,8 +4,7 @@
     <title>ItsolutionStuff.com</title>
 </head>
 <body>
-    <h1>{{ $details['title'] }}</h1>
-    <p>{{ $details['body'] }}</p>
+   <p>This email is for testing purpose.</p>
    
     <p>Thank you</p>
 </body>

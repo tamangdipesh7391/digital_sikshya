@@ -147,6 +147,7 @@ class SubjectContentController extends Controller
     
                ]);
             $data = SubjectContent::findOrFail($id);
+           
             $data->heading = $request->heading;
             $data->title = $request->title;
             $data->meta_description = $request->meta_description;
